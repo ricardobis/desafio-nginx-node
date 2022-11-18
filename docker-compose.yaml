@@ -1,0 +1,42 @@
+version: '3'
+services:
+  nginx:
+    build: 
+      context: nginx
+    container_name: nginx
+    ports:
+      - 8080:80
+    restart: always
+    networks:
+      - desafio-network
+
+  app:
+    build: 
+      context: node
+    container_name: app
+    volumes:
+      - ./node:/usr/src/app
+    tty: true
+    networks: 
+      - desafio-network
+    depends_on:
+      - db
+    
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
+    networks: 
+      - desafio-network
+
+networks:
+  desafio-network:
+    driver: bridge
