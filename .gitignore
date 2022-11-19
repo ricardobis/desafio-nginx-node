@@ -1,6 +1,4 @@
 /node/node_modules/
-/node/node_modules/*
-/mysql/
-/mysql/*
+/mysql/dbfiles/
 
 *.DS_Store
