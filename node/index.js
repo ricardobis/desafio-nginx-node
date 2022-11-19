@@ -32,5 +32,5 @@ app.listen(port, () => {
     connection.query(sql)
     connection.end()
 
-    console.log(`Rodando na URL http://localhost:${port}`)
+    console.log(`Rodando na URL http://localhost:8080`)
 })
